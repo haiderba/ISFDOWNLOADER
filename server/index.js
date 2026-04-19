@@ -79,7 +79,8 @@ app.get('/api/download', (req, res) => {
 // Serve frontend in production environments
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get('*', (req, res) => {
+// Catch-all for React router (compatible with Express 5)
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
