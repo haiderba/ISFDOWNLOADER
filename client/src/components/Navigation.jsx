@@ -7,7 +7,7 @@ import {
   Dices, Receipt, Calculator, Calendar, Activity, Tag, Briefcase, TrendingUp, Files
 } from 'lucide-react';
 
-const Navigation = () => {
+const Navigation = ({ mobileOpen, closeMobile }) => {
   const categories = [
     {
       name: "Main",
@@ -84,32 +84,36 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="sidebar">
-      <div className="sidebar-header">
-        <h2 className="logo">ISFVD Toolkit</h2>
-      </div>
-      <div className="nav-list-container" style={{overflowY: 'auto', flex: 1, paddingRight: '0.5rem'}}>
-        {categories.map((cat, idx) => (
-          <div key={idx} style={{marginBottom: '1.5rem'}}>
-            <h3 style={{fontSize: '0.75rem', textTransform: 'uppercase', color: '#64748b', letterSpacing: '1px', marginBottom: '0.5rem', paddingLeft: '1rem'}}>{cat.name}</h3>
-            <ul className="nav-list">
-              {cat.items.map((item) => (
-                <li key={item.path}>
-                  <NavLink
-                    to={item.path}
-                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                    style={{padding: '0.6rem 1rem'}}
-                  >
-                    <item.icon className="nav-icon" size={18} />
-                    <span style={{fontSize: '0.95rem'}}>{item.name}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </nav>
+    <>
+      {mobileOpen && <div className="mobile-backdrop d-none-desktop" onClick={closeMobile}></div>}
+      <nav className={`sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
+        <div className="sidebar-header hide-on-mobile">
+          <h2 className="logo">ISFVD Toolkit</h2>
+        </div>
+        <div className="nav-list-container" style={{overflowY: 'auto', flex: 1, paddingRight: '0.5rem'}}>
+          {categories.map((cat, idx) => (
+            <div key={idx} style={{marginBottom: '1.5rem'}}>
+              <h3 style={{fontSize: '0.75rem', textTransform: 'uppercase', color: '#64748b', letterSpacing: '1px', marginBottom: '0.5rem', paddingLeft: '1rem'}}>{cat.name}</h3>
+              <ul className="nav-list">
+                {cat.items.map((item) => (
+                  <li key={item.path}>
+                    <NavLink
+                      to={item.path}
+                      onClick={closeMobile}
+                      className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                      style={{padding: '0.6rem 1rem'}}
+                    >
+                      <item.icon className="nav-icon" size={18} />
+                      <span style={{fontSize: '0.95rem'}}>{item.name}</span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </nav>
+    </>
   );
 };
 
