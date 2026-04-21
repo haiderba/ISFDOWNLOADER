@@ -1,27 +1,69 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const VideoCard = ({ data }) => {
+const VideoCard = ({ data, type = 'video' }) => {
   const [downloading, setDownloading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState('');
 
   const handleDownload = async () => {
+    if (downloading) return;
     setDownloading(true);
-    try {
-      const baseUrl = import.meta.env.DEV ? 'http://localhost:3001' : '';
-      const downloadUrl = `${baseUrl}/api/download?url=${encodeURIComponent(data.originalUrl)}`;
+    setProgress(0);
+    setStatus('Preparing download...');
+
+    const jobId = crypto.randomUUID();
+    const baseUrl = import.meta.env.DEV ? 'http://localhost:3001' : '';
+    
+    const eventSource = new EventSource(`${baseUrl}/api/progress?jobId=${jobId}`);
+    
+    eventSource.onmessage = (event) => {
+      const parsedData = JSON.parse(event.data);
+      if (parsedData.status === 'connected') return;
       
-      // Trigger native download
+      if (parsedData.status === 'error') {
+        setStatus('Error occurred');
+        setDownloading(false);
+        eventSource.close();
+        return;
+      }
+
+      if (parsedData.status === 'done') {
+        setStatus('Finished!');
+        setProgress(100);
+        setTimeout(() => {
+          setDownloading(false);
+          setProgress(0);
+          setStatus('');
+        }, 3000);
+        eventSource.close();
+        return;
+      }
+      
+      setStatus(parsedData.status);
+      if (parsedData.progress !== undefined) {
+        setProgress(parsedData.progress);
+      }
+    };
+
+    eventSource.onerror = () => {
+      eventSource.close();
+      setDownloading(false);
+      setStatus('Connection lost');
+    };
+
+    try {
+      const downloadUrl = `${baseUrl}/api/download?url=${encodeURIComponent(data.originalUrl)}&type=${type}&jobId=${jobId}`;
       const a = document.createElement('a');
       a.href = downloadUrl;
-      a.download = 'video.mp4';
+      a.download = type === 'audio' ? 'audio.mp3' : 'video.mp4';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      
     } catch (error) {
       console.error('Download failed', error);
-      alert('Failed to start download. Please try again.');
-    } finally {
+      setStatus('Failed to start');
       setDownloading(false);
+      eventSource.close();
     }
   };
 
@@ -47,12 +89,24 @@ const VideoCard = ({ data }) => {
           
           <div className="action-buttons">
             <button className="btn" onClick={handleDownload} disabled={downloading}>
-              {downloading ? 'Starting...' : 'Download MP4'}
+              {downloading ? 'Processing...' : (type === 'audio' ? 'Download MP3' : 'Download MP4')}
             </button>
             <a href={data.originalUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
               Open Original
             </a>
           </div>
+
+          {downloading && (
+            <div className="progress-container">
+              <div className="progress-header">
+                <span className="progress-status">{status}</span>
+                <span className="progress-percent">{Math.round(progress)}%</span>
+              </div>
+              <div className="progress-bar-bg">
+                <div className="progress-bar-fill" style={{ width: `${progress}%` }}></div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
