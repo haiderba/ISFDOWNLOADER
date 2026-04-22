@@ -6,7 +6,7 @@ import {
   Palette, PaintBucket, Key, Code, FileEdit, Type, Globe, Layout,
   Database, Layers, Smartphone, Smile, Home as HomeIcon, Calendar, Activity, Keyboard, LayoutDashboard, GitCompare, HardDrive, LayoutTemplate, Minimize,
   Clock, Headphones, Video, Dices, Receipt, Calculator, Search,
-  Briefcase, TrendingUp, Tag, Shield, PenTool, AlignLeft, Files, Eye
+  Briefcase, TrendingUp, Tag, Shield, PenTool, AlignLeft, Files, Eye, Star
 } from 'lucide-react';
 
 const Home = () => {
@@ -25,9 +25,6 @@ const Home = () => {
     setFavorites(newFavs);
     localStorage.setItem('onetooldeck_favorites', JSON.stringify(newFavs));
   };
-
-  const allTools = categories.flatMap(c => c.tools);
-  const favoriteTools = allTools.filter(t => favorites.includes(t.path));
 
   const categories = [
     {
@@ -102,6 +99,10 @@ const Home = () => {
       ]
     }
   ];
+
+  const allTools = categories.flatMap(c => c.tools);
+  const favoriteTools = allTools.filter(t => favorites.includes(t.path));
+
   const filteredCategories = categories.map(cat => ({
     ...cat,
     tools: cat.tools.filter(tool => 

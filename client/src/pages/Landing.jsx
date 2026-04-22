@@ -305,6 +305,35 @@ const Landing = () => {
           .landing-page .hide-on-mobile {
             display: none !important;
           }
+          .landing-page section {
+            padding: 4rem 1.5rem !important;
+          }
+          .landing-page h1 {
+            font-size: 3rem !important;
+            letter-spacing: -1px !important;
+          }
+          .landing-page .result-card {
+            padding: 1.5rem !important;
+          }
+          .landing-page nav {
+            padding: 1rem 1.5rem !important;
+          }
+          .landing-page .logo span {
+            font-size: 1.1rem !important;
+          }
+          .landing-page .btn {
+            padding: 0.8rem 1.2rem !important;
+            font-size: 0.9rem !important;
+          }
+          .landing-page [style*="display: flex"][style*="justify-content: center"][style*="gap: 1.25rem"] {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 0.8rem !important;
+            padding: 0 2rem;
+          }
+          .landing-page h1 {
+            margin-top: 2rem !important;
+          }
         }
       `}</style>
     </div>
