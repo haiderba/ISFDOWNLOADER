@@ -37,7 +37,7 @@ const PdfLab = () => {
       
       for (const item of files) {
         const fileBytes = await item.file.arrayBuffer();
-        const pdf = await PDFDocument.load(fileBytes);
+        const pdf = await PDFDocument.load(fileBytes, { ignoreEncryption: true });
         const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
         copiedPages.forEach((page) => mergedPdf.addPage(page));
       }
@@ -57,7 +57,7 @@ const PdfLab = () => {
 
     try {
       const fileBytes = await item.file.arrayBuffer();
-      const pdf = await PDFDocument.load(fileBytes);
+      const pdf = await PDFDocument.load(fileBytes, { ignoreEncryption: true });
       const pageCount = pdf.getPageCount();
 
       for (let i = 0; i < pageCount; i++) {
