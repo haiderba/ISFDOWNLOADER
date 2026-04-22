@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
+import CommandDeck from './components/CommandDeck';
 
 // Media Tools
 import VideoDownloader from './pages/VideoDownloader';
@@ -64,13 +65,10 @@ import './index.css';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route element={<Layout />}>
-        <Route path="dashboard" element={<Home />} />
-        
-        {/* Media Tools */}
-        <Route path="video" element={<VideoDownloader />} />
+    <>
+      <CommandDeck />
+      <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="audio" element={<AudioExtractor />} />
         <Route path="thumbnail" element={<ThumbnailGrabber />} />
         <Route path="subtitles" element={<SubtitleDownloader />} />
