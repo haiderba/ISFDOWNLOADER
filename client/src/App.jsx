@@ -44,6 +44,21 @@ import DiscountCalc from './pages/DiscountCalc';
 import SalaryConverter from './pages/SalaryConverter';
 import CompoundInterest from './pages/CompoundInterest';
 
+// Phase 5 Tools
+import KanbanBoard from './pages/KanbanBoard';
+import DiffChecker from './pages/DiffChecker';
+import ScientificCalc from './pages/ScientificCalc';
+import Base64Encoder from './pages/Base64Encoder';
+import UuidGenerator from './pages/UuidGenerator';
+
+// Phase 6 Tools
+import MetaGenerator from './pages/MetaGenerator';
+import CodeMinifier from './pages/CodeMinifier';
+import FlexboxBuilder from './pages/FlexboxBuilder';
+import FaviconGenerator from './pages/FaviconGenerator';
+import MacroCalc from './pages/MacroCalc';
+import FractionCalc from './pages/FractionCalc';
+
 import './index.css';
 
 function App() {
@@ -84,6 +99,7 @@ function App() {
         <Route path="recorder" element={<ScreenRecorder />} />
         <Route path="timezone" element={<TimeZonePlanner />} />
         <Route path="scratchpad" element={<Scratchpad />} />
+        <Route path="kanban" element={<KanbanBoard />} />
         
         {/* Games & Fun */}
         <Route path="wheel" element={<DecisionWheel />} />
@@ -99,6 +115,20 @@ function App() {
         <Route path="discount" element={<DiscountCalc />} />
         <Route path="salary" element={<SalaryConverter />} />
         <Route path="interest" element={<CompoundInterest />} />
+        <Route path="scientific" element={<ScientificCalc />} />
+
+        {/* Phase 5 Developer */}
+        <Route path="diff" element={<DiffChecker />} />
+        <Route path="base64" element={<Base64Encoder />} />
+        <Route path="uuid" element={<UuidGenerator />} />
+
+        {/* Phase 6 Developer & Utilities */}
+        <Route path="meta" element={<MetaGenerator />} />
+        <Route path="minify" element={<CodeMinifier />} />
+        <Route path="flexbox" element={<FlexboxBuilder />} />
+        <Route path="favicon" element={<FaviconGenerator />} />
+        <Route path="macro" element={<MacroCalc />} />
+        <Route path="fraction" element={<FractionCalc />} />
       </Route>
     </Routes>
   );

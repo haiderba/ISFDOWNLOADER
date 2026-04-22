@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { 
   Download, Music, Image as ImageIcon, FileText, Film, QrCode, Home,
-  Palette, PaintBucket, Layers, Smartphone, Smile, Eye,
-  Key, Code, FileEdit, Type, Globe, Database, Shield, PenTool, AlignLeft,
-  Clock, Headphones, Video, Keyboard,
+  Palette, PaintBucket, Layers, Smartphone, Smile, Eye, Layout,
+  Key, Code, FileEdit, Type, Globe, Database, Shield, PenTool, AlignLeft, Files,
+  Clock, Headphones, Video, Keyboard, LayoutDashboard, GitCompare, HardDrive, LayoutTemplate, Minimize,
   Dices, Receipt, Calculator, Calendar, Activity, Tag, Briefcase, TrendingUp, Files
 } from 'lucide-react';
 
@@ -30,6 +30,8 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
         { name: 'Color Extractor', path: '/color', icon: Palette },
         { name: 'CSS Gradient', path: '/gradient', icon: PaintBucket },
         { name: 'Box Shadow', path: '/shadow', icon: Layers },
+        { name: 'Flexbox Builder', path: '/flexbox', icon: Layout },
+        { name: 'Favicon Generator', path: '/favicon', icon: ImageIcon },
         { name: 'Device Mockup', path: '/mockup', icon: Smartphone },
         { name: 'Color Contrast', path: '/contrast', icon: Eye },
         { name: 'Image Optimizer', path: '/optimizer', icon: ImageIcon },
@@ -40,9 +42,14 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
     {
       name: "Developer Utilities",
       items: [
+        { name: 'Meta Tag Gen', path: '/meta', icon: LayoutTemplate },
+        { name: 'Code Minifier', path: '/minify', icon: Minimize },
         { name: 'Dummy Data Gen', path: '/dummy', icon: Database },
         { name: 'JSON Formatter', path: '/json', icon: Code },
         { name: 'Markdown Editor', path: '/markdown', icon: FileEdit },
+        { name: 'Base64 Encoder', path: '/base64', icon: HardDrive },
+        { name: 'UUID Generator', path: '/uuid', icon: Database },
+        { name: 'Text Diff Checker', path: '/diff', icon: GitCompare },
         { name: 'Case Converter', path: '/case', icon: Type },
         { name: 'Text Analyzer', path: '/text', icon: AlignLeft },
         { name: 'IP Tracker', path: '/ip', icon: Globe },
@@ -54,6 +61,7 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
     {
       name: "Focus & Productivity",
       items: [
+        { name: 'Kanban Board', path: '/kanban', icon: LayoutDashboard },
         { name: 'Scratchpad', path: '/scratchpad', icon: PenTool },
         { name: 'Pomodoro Timer', path: '/pomodoro', icon: Clock },
         { name: 'Ambient Noise', path: '/noise', icon: Headphones },
@@ -65,6 +73,9 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
     {
       name: "Life & Tools",
       items: [
+        { name: 'Macro Diet Calc', path: '/macro', icon: Activity },
+        { name: 'Fraction Calc', path: '/fraction', icon: Calculator },
+        { name: 'Scientific Calc', path: '/scientific', icon: Calculator },
         { name: 'Age Calculator', path: '/age', icon: Calendar },
         { name: 'Health & BMR', path: '/health', icon: Activity },
         { name: 'Discount Calc', path: '/discount', icon: Tag },
