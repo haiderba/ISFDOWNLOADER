@@ -69,10 +69,13 @@ function App() {
       <CommandDeck />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="audio" element={<AudioExtractor />} />
-        <Route path="thumbnail" element={<ThumbnailGrabber />} />
-        <Route path="subtitles" element={<SubtitleDownloader />} />
-        <Route path="gif" element={<GifMaker />} />
+        <Route element={<Layout />}>
+          <Route path="dashboard" element={<Home />} />
+          <Route path="video" element={<VideoDownloader />} />
+          <Route path="audio" element={<AudioExtractor />} />
+          <Route path="thumbnail" element={<ThumbnailGrabber />} />
+          <Route path="subtitles" element={<SubtitleDownloader />} />
+          <Route path="gif" element={<GifMaker />} />
         
         {/* Design Tools */}
         <Route path="color" element={<ColorExtractor />} />
