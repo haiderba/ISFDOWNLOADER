@@ -11,6 +11,8 @@ import ThumbnailGrabber from './pages/ThumbnailGrabber';
 import SubtitleDownloader from './pages/SubtitleDownloader';
 import GifMaker from './pages/GifMaker';
 import QrGenerator from './pages/QrGenerator';
+import PdfLab from './pages/PdfLab';
+import ImageEditor from './pages/ImageEditor';
 
 // New Tools
 import ColorExtractor from './pages/ColorExtractor';
@@ -76,9 +78,11 @@ function App() {
           <Route path="thumbnail" element={<ThumbnailGrabber />} />
           <Route path="subtitles" element={<SubtitleDownloader />} />
           <Route path="gif" element={<GifMaker />} />
-        
-        {/* Design Tools */}
-        <Route path="color" element={<ColorExtractor />} />
+          <Route path="pdflab" element={<PdfLab />} />
+          
+          {/* Design Tools */}
+          <Route path="image-editor" element={<ImageEditor />} />
+          <Route path="color" element={<ColorExtractor />} />
         <Route path="gradient" element={<CssGradient />} />
         <Route path="shadow" element={<BoxShadowGen />} />
         <Route path="mockup" element={<DeviceMockup />} />

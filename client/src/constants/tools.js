@@ -13,8 +13,10 @@ export const ALL_TOOLS = [
   { title: 'Thumbnails', desc: 'Get YouTube covers', path: '/thumbnail', icon: ImageIcon, color: '#f59e0b', category: 'Media' },
   { title: 'Subtitles', desc: 'Download SRT files', path: '/subtitles', icon: FileText, color: '#10b981', category: 'Media' },
   { title: 'Video to GIF', desc: 'Create animations', path: '/gif', icon: Film, color: '#06b6d4', category: 'Media' },
+  { title: 'The Lab (PDF)', desc: 'Merge & Split PDFs', path: '/pdflab', icon: FileText, color: '#ef4444', category: 'Media' },
   
   // Design
+  { title: 'Pro Image Editor', desc: 'Canvas-based editing', path: '/image-editor', icon: ImageIcon, color: '#f59e0b', category: 'Design' },
   { title: 'Color Extractor', desc: 'Pull palettes from images', path: '/color', icon: Palette, color: '#ec4899', category: 'Design' },
   { title: 'CSS Gradients', desc: 'Generate web gradients', path: '/gradient', icon: PaintBucket, color: '#8b5cf6', category: 'Design' },
   { title: 'Box Shadows', desc: 'Design CSS shadows', path: '/shadow', icon: Layers, color: '#3b82f6', category: 'Design' },
