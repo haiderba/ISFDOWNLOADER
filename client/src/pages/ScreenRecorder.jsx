@@ -90,13 +90,13 @@ const ScreenRecorder = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '800px', margin: '0 auto'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '3rem'}}>
-        <h1><Video style={{display: 'inline', marginRight: '10px'}} /> Screen Recorder</h1>
+    <div className="page-container">
+      <header className="page-header">
+        <h1><Video /> Screen Recorder</h1>
         <p className="subtitle">Record your desktop or specific browser tabs natively without any software.</p>
       </header>
 
-      <div className="result-card" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4rem 2rem', border: recording ? '2px solid #ef4444' : '1px solid var(--card-border)'}}>
+      <div className="result-card">
         
         {!recording && !videoUrl && (
           <div style={{textAlign: 'center', marginBottom: '2rem'}}>

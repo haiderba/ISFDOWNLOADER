@@ -30,7 +30,7 @@ const DiscountCalc = () => {
   const data = calculate();
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Tag style={{display: 'inline', marginRight: '10px'}} /> Discount & Sales Tax Calculator</h1>
         <p className="subtitle">Find exactly how much you are paying (and saving) at the register.</p>

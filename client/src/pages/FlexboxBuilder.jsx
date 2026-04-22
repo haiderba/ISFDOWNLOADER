@@ -88,7 +88,8 @@ const FlexboxBuilder = () => {
                  justifyContent: styles.justifyContent,
                  alignItems: styles.alignItems,
                  flexWrap: styles.flexWrap,
-                 gap: `${styles.gap}px`
+                 gap: `${styles.gap}px`,
+                 overflow: 'auto'
                }}
              >
                 {Array.from({length: itemCount}).map((_, idx) => (

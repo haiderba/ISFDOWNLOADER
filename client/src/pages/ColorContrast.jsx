@@ -4,8 +4,6 @@ import { Eye, ShieldAlert, ShieldCheck } from 'lucide-react';
 const ColorContrast = () => {
   const [bgHex, setBgHex] = useState('#ffffff');
   const [textHex, setTextHex] = useState('#000000');
-  const [ratio, setRatio] = useState(21);
-
   // Helper to convert HEX to RGB
   const hexToRgb = (hex) => {
     let raw = hex.replace('#', '');
@@ -29,20 +27,18 @@ const ColorContrast = () => {
     return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
   };
 
-  useEffect(() => {
-    const bgRgb = hexToRgb(bgHex);
-    const textRgb = hexToRgb(textHex);
+  // Compute luminance synchronously during render to avoid useEffect delay
+  const bgRgb = hexToRgb(bgHex);
+  const textRgb = hexToRgb(textHex);
 
-    if (bgRgb && textRgb) {
-      const lum1 = getLuminance(bgRgb.r, bgRgb.g, bgRgb.b);
-      const lum2 = getLuminance(textRgb.r, textRgb.g, textRgb.b);
-      const brightest = Math.max(lum1, lum2);
-      const darkest = Math.min(lum1, lum2);
-      
-      const contrast = (brightest + 0.05) / (darkest + 0.05);
-      setRatio(contrast);
-    }
-  }, [bgHex, textHex]);
+  let ratio = 1;
+  if (bgRgb && textRgb) {
+    const lum1 = getLuminance(bgRgb.r, bgRgb.g, bgRgb.b);
+    const lum2 = getLuminance(textRgb.r, textRgb.g, textRgb.b);
+    const brightest = Math.max(lum1, lum2);
+    const darkest = Math.min(lum1, lum2);
+    ratio = (brightest + 0.05) / (darkest + 0.05);
+  }
 
   const passesAA_Normal = ratio >= 4.5;
   const passesAA_Large = ratio >= 3.0;
@@ -62,7 +58,7 @@ const ColorContrast = () => {
   );
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Eye style={{display: 'inline', marginRight: '10px'}} /> Contrast & Accessibility Checker</h1>
         <p className="subtitle">Ensure your colors comply with WCAG inclusivity standards.</p>

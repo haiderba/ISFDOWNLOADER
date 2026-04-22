@@ -104,7 +104,7 @@ const FaviconGenerator = () => {
              </div>
              
              <div style={{background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', borderLeft: '3px solid #3b82f6'}}>
-               <p style={{margin: 0, fontSize: '0.85rem', color: '#cbd5e1'}}><strong>How to use:</strong> Add <code style={{color: '#f59e0b'}}>&lt;link rel="icon" href="/favicon-32x32.png" sizes="32x32"&gt;</code> into the `<head>` of your website html file.</p>
+               <p style={{margin: 0, fontSize: '0.85rem', color: '#cbd5e1'}}><strong>How to use:</strong> Add <code style={{color: '#f59e0b'}}>&lt;link rel="icon" href="/favicon-32x32.png" sizes="32x32"&gt;</code> into the &lt;head&gt; of your website html file.</p>
              </div>
           </div>
         )}

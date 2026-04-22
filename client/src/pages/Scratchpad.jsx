@@ -7,7 +7,7 @@ const Scratchpad = () => {
 
   // Load from local storage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('isfvd_scratchpad');
+    const saved = localStorage.getItem('onetooldeck_scratchpad');
     if (saved) {
       setContent(saved);
     }
@@ -17,7 +17,7 @@ const Scratchpad = () => {
   const handleChange = (e) => {
     const val = e.target.value;
     setContent(val);
-    localStorage.setItem('isfvd_scratchpad', val);
+    localStorage.setItem('onetooldeck_scratchpad', val);
     
     // flash the saved indicator
     setShowSavedData(true);
@@ -27,7 +27,7 @@ const Scratchpad = () => {
   const clearPad = () => {
     if (window.confirm('Are you sure you want to clear your scratchpad?')) {
       setContent('');
-      localStorage.removeItem('isfvd_scratchpad');
+      localStorage.removeItem('onetooldeck_scratchpad');
     }
   };
 

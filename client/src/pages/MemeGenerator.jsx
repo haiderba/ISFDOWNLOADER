@@ -76,7 +76,7 @@ const MemeGenerator = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Type style={{display: 'inline', marginRight: '10px'}} /> Meme Generator</h1>
         <p className="subtitle">Classic impact-font meme creation.</p>

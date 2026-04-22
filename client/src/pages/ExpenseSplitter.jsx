@@ -46,7 +46,7 @@ const ExpenseSplitter = () => {
   const grandTotal = (parseFloat(total) || 0) + (parseFloat(tax) || 0) + (parseFloat(tip) || 0);
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Receipt style={{display: 'inline', marginRight: '10px'}} /> Expense Splitter</h1>
         <p className="subtitle">Split the dinner bill instantly, including tax and tip.</p>

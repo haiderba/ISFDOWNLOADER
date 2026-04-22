@@ -64,7 +64,7 @@ const DecisionWheel = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Dices style={{display: 'inline', marginRight: '10px'}} /> Decision Wheel</h1>
         <p className="subtitle">Let fate decide. Add your choices and spin the wheel.</p>

@@ -98,7 +98,7 @@ const DummyDataGen = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Database style={{display: 'inline', marginRight: '10px'}} /> Dummy Data Generator</h1>
         <p className="subtitle">Generate realistic local user data instantly for database testing.</p>

@@ -43,7 +43,7 @@ const MortgageCalc = () => {
   const dPerc = (data.dpAmount / totalCostOfHome) * 100 || 0;
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Home style={{display: 'inline', marginRight: '10px'}} /> Mortgage Calculator</h1>
         <p className="subtitle">Visualize the true cost of your home loan over time.</p>

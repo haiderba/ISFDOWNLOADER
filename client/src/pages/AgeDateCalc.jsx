@@ -57,13 +57,13 @@ const AgeDateCalc = () => {
   const ageData = tab === 'age' ? calcAge() : calcDiff();
 
   return (
-    <div className="page-container" style={{maxWidth: '800px'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
-        <h1><Calendar style={{display: 'inline', marginRight: '10px'}} /> Age & Date Calculator</h1>
+    <div className="page-container">
+      <header className="page-header">
+        <h1><Calendar /> Age & Date Calculator</h1>
         <p className="subtitle">Find your exact age down to the day, or diff two dates.</p>
       </header>
 
-      <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '2rem'}}>
+      <div>
         <button 
           onClick={() => setTab('age')}
           className="btn"

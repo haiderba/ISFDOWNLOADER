@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Calculator, ArrowRightLeft, Activity, Scale, Ruler, DollarSign } from 'lucide-react';
+import ToolHeader from '../components/ToolHeader';
 
 const conversionChart = {
   length: {
@@ -120,14 +121,16 @@ const UnitConverter = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '800px', margin: '0 auto'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '3rem'}}>
-        <h1><Calculator style={{display: 'inline', marginRight: '10px'}} /> Universal Converter</h1>
-        <p className="subtitle">Length, weight, temperature, and live foreign exchange rates.</p>
-      </header>
+    <div className="page-container">
+      <ToolHeader 
+        title="Universal Converter" 
+        subtitle="Length, weight, temperature, and live foreign exchange rates." 
+        icon={Calculator}
+        path="/converter"
+      />
 
       {/* Category Selection Tabs */}
-      <div style={{display: 'flex', gap: '0.8rem', justifyContent: 'center', marginBottom: '3rem', flexWrap: 'wrap'}}>
+      <div>
         {Object.entries(conversionChart).map(([cat, config]) => {
           const Icon = config.icon;
           const isActive = category === cat;

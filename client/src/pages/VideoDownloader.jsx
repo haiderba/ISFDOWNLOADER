@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Download } from 'lucide-react';
+import ToolHeader from '../components/ToolHeader';
 import VideoCard from '../components/VideoCard';
 
 const VideoDownloader = () => {
@@ -37,10 +39,12 @@ const VideoDownloader = () => {
 
   return (
     <div className="page-container">
-      <header className="page-header">
-        <h1>Video Downloader</h1>
-        <p className="subtitle">Download videos without watermarks.</p>
-      </header>
+      <ToolHeader 
+        title="Universal Video Downloader" 
+        subtitle="Download high-quality MP4s from 10+ major platforms instantly." 
+        icon={Download}
+        path="/video"
+      />
 
       <form className="search-box" onSubmit={fetchVideoInfo}>
         <input 

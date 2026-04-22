@@ -49,7 +49,7 @@ const BmiBmrCalc = () => {
   const status = data ? getBmiStatus(data.bmi) : null;
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><Activity style={{display: 'inline', marginRight: '10px'}} /> Health Calculator (BMI & BMR)</h1>
         <p className="subtitle">Find your Body Mass Index, resting metabolic rate, and daily hydration needs.</p>

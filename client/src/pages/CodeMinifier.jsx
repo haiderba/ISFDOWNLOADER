@@ -51,7 +51,7 @@ const CodeMinifier = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><FileEdit style={{display: 'inline', marginRight: '10px'}} /> Code Minifier</h1>
         <p className="subtitle">Clean, compress, or beautify CSS and JSON strings instantly.</p>

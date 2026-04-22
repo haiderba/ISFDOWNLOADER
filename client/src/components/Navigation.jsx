@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { 
   Download, Music, Image as ImageIcon, FileText, Film, QrCode, Home,
   Palette, PaintBucket, Layers, Smartphone, Smile, Eye, Layout,
   Key, Code, FileEdit, Type, Globe, Database, Shield, PenTool, AlignLeft, Files,
   Clock, Headphones, Video, Keyboard, LayoutDashboard, GitCompare, HardDrive, LayoutTemplate, Minimize,
-  Dices, Receipt, Calculator, Calendar, Activity, Tag, Briefcase, TrendingUp, Files
+  Dices, Receipt, Calculator, Calendar, Activity, Tag, Briefcase, TrendingUp
 } from 'lucide-react';
 
 const Navigation = ({ mobileOpen, closeMobile }) => {
@@ -12,7 +12,7 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
     {
       name: "Main",
       items: [
-        { name: 'Home', path: '/', icon: Home },
+        { name: 'Dashboard', path: '/dashboard', icon: Home },
       ]
     },
     {
@@ -99,7 +99,7 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
       {mobileOpen && <div className="mobile-backdrop d-none-desktop" onClick={closeMobile}></div>}
       <nav className={`sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-header hide-on-mobile">
-          <h2 className="logo">ISFVD Toolkit</h2>
+          <Link to="/" style={{textDecoration: 'none'}}><h2 className="logo">OneToolDeck</h2></Link>
         </div>
         <div className="nav-list-container" style={{overflowY: 'auto', flex: 1, paddingRight: '0.5rem'}}>
           {categories.map((cat, idx) => (

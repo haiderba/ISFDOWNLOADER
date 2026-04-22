@@ -29,14 +29,14 @@ const PomodoroTimer = () => {
     // Update Document Title
     const m = Math.floor(timeLeft / 60);
     const s = timeLeft % 60;
-    document.title = `${m}:${s.toString().padStart(2, '0')} - ${mode === 'focus' ? 'Focus' : 'Break'} | ISFVD`;
+    document.title = `${m}:${s.toString().padStart(2, '0')} - ${mode === 'focus' ? 'Focus' : 'Break'} | OneToolDeck`;
 
     return () => clearInterval(interval);
   }, [isRunning, timeLeft, mode]);
 
   // Clean up title on unmount
   useEffect(() => {
-    return () => { document.title = 'ISFVD Toolkit'; };
+    return () => { document.title = 'OneToolDeck Dashboard'; };
   }, []);
 
   const switchMode = (newMode) => {

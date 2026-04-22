@@ -38,13 +38,13 @@ const UuidGenerator = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '800px'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
-        <h1><Database style={{display: 'inline', marginRight: '10px'}} /> Bulk UUID / GUID Generator</h1>
+    <div className="page-container">
+      <header className="page-header">
+        <h1><Database /> Bulk UUID / GUID Generator</h1>
         <p className="subtitle">Instantly generate cryptographically secure unique identifiers for your database.</p>
       </header>
 
-      <div className="result-card" style={{padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem'}}>
+      <div className="result-card">
         
         {/* Controls */}
         <div style={{display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap'}}>

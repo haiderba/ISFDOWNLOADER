@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { Layout } from 'lucide-react';
+import ToolHeader from '../components/ToolHeader';
 import { LayoutDashboard, Plus, Trash2 } from 'lucide-react';
 
 const initialData = {
@@ -14,7 +15,7 @@ const KanbanBoard = () => {
 
   // Local Storage Sync
   useEffect(() => {
-    const saved = localStorage.getItem('isfvd_kanban');
+    const saved = localStorage.getItem('onetooldeck_kanban');
     if (saved) {
       try {
         setColumns(JSON.parse(saved));
@@ -24,7 +25,7 @@ const KanbanBoard = () => {
 
   const updateAndSave = (newCols) => {
     setColumns(newCols);
-    localStorage.setItem('isfvd_kanban', JSON.stringify(newCols));
+    localStorage.setItem('onetooldeck_kanban', JSON.stringify(newCols));
   };
 
   // Drag Handlers
@@ -87,10 +88,12 @@ const KanbanBoard = () => {
 
   return (
     <div className="page-container" style={{maxWidth: '1200px'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
-        <h1><LayoutDashboard style={{display: 'inline', marginRight: '10px'}} /> Local Kanban Board</h1>
-        <p className="subtitle">Drag and drop tasks. Everything saves instantly to your browser storage.</p>
-      </header>
+      <ToolHeader 
+        title="Project Workspace" 
+        subtitle="Manage your tasks and ideas with our local-first Kanban system." 
+        icon={Layout}
+        path="/kanban"
+      />
 
       {/* Add Task Form */}
       <form onSubmit={addTask} style={{display: 'flex', gap: '1rem', marginBottom: '2rem'}}>

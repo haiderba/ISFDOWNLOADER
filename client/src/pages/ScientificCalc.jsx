@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Calculator } from 'lucide-react';
+import ToolHeader from '../components/ToolHeader';
 
 const ScientificCalc = () => {
   const [display, setDisplay] = useState('0');
@@ -74,11 +75,13 @@ const ScientificCalc = () => {
   );
 
   return (
-    <div className="page-container" style={{maxWidth: '800px', margin: '0 auto'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
-        <h1><Calculator style={{display: 'inline', marginRight: '10px'}} /> Scientific Calculator</h1>
-        <p className="subtitle">High-precision mathematics directly in your browser.</p>
-      </header>
+    <div className="page-container">
+      <ToolHeader 
+        title="Scientific Calculator" 
+        subtitle="High-precision mathematics directly in your browser." 
+        icon={Calculator}
+        path="/scientific"
+      />
 
       <div className="result-card" style={{padding: '2.5rem', background: 'linear-gradient(145deg, #1e293b, #0f172a)'}}>
         

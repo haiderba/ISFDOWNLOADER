@@ -32,7 +32,7 @@ const CompoundInterest = () => {
   const interestPerc = (data.totalInterest / data.totalBal) * 100 || 0;
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><TrendingUp style={{display: 'inline', marginRight: '10px'}} /> Investment & Compound Interest</h1>
         <p className="subtitle">See how your money snowballs over time with regular contributions.</p>

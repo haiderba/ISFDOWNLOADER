@@ -65,13 +65,13 @@ const FractionCalc = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '800px', margin: '0 auto'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
-        <h1><Calculator style={{display: 'inline', marginRight: '10px'}} /> Fraction & Decimal Extractor</h1>
+    <div className="page-container">
+      <header className="page-header">
+        <h1><Calculator /> Fraction & Decimal Extractor</h1>
         <p className="subtitle">Instantly convert between complex construction fractions and strict decimals.</p>
       </header>
 
-      <div className="result-card" style={{padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem'}}>
+      <div className="result-card">
         
         {/* Toggle Mode */}
         <div style={{display: 'flex', gap: '0.5rem', background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '12px', width: 'fit-content', margin: '0 auto'}}>

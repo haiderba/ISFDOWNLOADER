@@ -44,7 +44,7 @@ const MetaGenerator = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '1000px'}}>
+    <div className="page-container">
       <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
         <h1><LayoutTemplate style={{display: 'inline', marginRight: '10px'}} /> Meta & OpenGraph Generator</h1>
         <p className="subtitle">Instantly generate perfect HTML meta tags for SEO and link previews.</p>
@@ -91,7 +91,7 @@ const MetaGenerator = () => {
         <div style={{flex: 1, minWidth: '400px', display: 'flex', flexDirection: 'column'}}>
            <div className="result-card" style={{padding: 0, overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column'}}>
              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderBottom: '1px solid var(--card-border)'}}>
-               <span style={{color: '#cbd5e1', fontWeight: 'bold'}}>Generated HTML `<head>` Code</span>
+               <span style={{color: '#cbd5e1', fontWeight: 'bold'}}>Generated HTML &lt;head&gt; Code</span>
                <button onClick={copyToClipboard} className="btn" style={{padding: '0.4rem 1rem', fontSize: '0.85rem'}}><Copy size={16} /> Copy</button>
              </div>
              

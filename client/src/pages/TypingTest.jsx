@@ -120,13 +120,13 @@ const TypingTest = () => {
   };
 
   return (
-    <div className="page-container" style={{maxWidth: '800px'}}>
-      <header className="page-header" style={{textAlign: 'center', marginBottom: '2rem'}}>
+    <div className="page-container">
+      <header className="page-header">
         <h1><Keyboard style={{display: 'inline', marginRight: '10px'}} /> Typing Speed Test</h1>
         <p className="subtitle">Test your Words Per Minute (WPM) speed against the clock.</p>
       </header>
 
-      <div className="result-card" style={{padding: '3rem 2rem', position: 'relative'}}>
+      <div className="result-card">
         
         {/* Top Bar */}
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', fontSize: '1.5rem', fontWeight: 'bold'}}>

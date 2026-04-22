@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import Landing from './pages/Landing';
 
 // Media Tools
 import VideoDownloader from './pages/VideoDownloader';
@@ -64,8 +65,9 @@ import './index.css';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
+      <Route path="/" element={<Landing />} />
+      <Route element={<Layout />}>
+        <Route path="dashboard" element={<Home />} />
         
         {/* Media Tools */}
         <Route path="video" element={<VideoDownloader />} />
