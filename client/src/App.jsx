@@ -130,7 +130,8 @@ function App() {
         <Route path="macro" element={<MacroCalc />} />
         <Route path="fraction" element={<FractionCalc />} />
       </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
