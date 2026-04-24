@@ -4,7 +4,7 @@ import {
   Palette, PaintBucket, Layers, Smartphone, Smile, Eye, Layout,
   Key, Code, FileEdit, Type, Globe, Database, Shield, PenTool, AlignLeft, Files,
   Clock, Headphones, Video, Keyboard, LayoutDashboard, GitCompare, HardDrive, LayoutTemplate, Minimize,
-  Dices, Receipt, Calculator, Calendar, Activity, Tag, Briefcase, TrendingUp
+  Dices, Receipt, Calculator, Calendar, Activity, Tag, Briefcase, TrendingUp, BarChart3, Scissors
 } from 'lucide-react';
 
 const Navigation = ({ mobileOpen, closeMobile }) => {
@@ -22,6 +22,7 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
         { name: 'Audio Extractor', path: '/audio', icon: Music },
         { name: 'Thumbnail Grabber', path: '/thumbnail', icon: ImageIcon },
         { name: 'Subtitle Grabber', path: '/subtitles', icon: FileText },
+        { name: 'PDF Lab', path: '/pdflab', icon: FileText },
       ]
     },
     {
@@ -34,6 +35,7 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
         { name: 'Favicon Generator', path: '/favicon', icon: ImageIcon },
         { name: 'Device Mockup', path: '/mockup', icon: Smartphone },
         { name: 'Color Contrast', path: '/contrast', icon: Eye },
+        { name: 'Pro Image Editor', path: '/image-editor', icon: ImageIcon },
         { name: 'Image Optimizer', path: '/optimizer', icon: ImageIcon },
         { name: 'Video to GIF', path: '/gif', icon: Film },
         { name: 'Meme Generator', path: '/meme', icon: Smile },
@@ -80,6 +82,7 @@ const Navigation = ({ mobileOpen, closeMobile }) => {
         { name: 'Health & BMR', path: '/health', icon: Activity },
         { name: 'Discount Calc', path: '/discount', icon: Tag },
         { name: 'Unit Converter', path: '/converter', icon: Calculator },
+        { name: 'Visual Chart Deck', path: '/visualizer', icon: BarChart3 },
         { name: 'Decision Wheel', path: '/wheel', icon: Dices },
       ]
     },
