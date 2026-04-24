@@ -62,6 +62,7 @@ import FlexboxBuilder from './pages/FlexboxBuilder';
 import FaviconGenerator from './pages/FaviconGenerator';
 import MacroCalc from './pages/MacroCalc';
 import FractionCalc from './pages/FractionCalc';
+import DataVisualizer from './pages/DataVisualizer';
 
 import './index.css';
 
@@ -136,6 +137,7 @@ function App() {
         <Route path="favicon" element={<FaviconGenerator />} />
         <Route path="macro" element={<MacroCalc />} />
         <Route path="fraction" element={<FractionCalc />} />
+        <Route path="visualizer" element={<DataVisualizer />} />
       </Route>
       </Routes>
     </>

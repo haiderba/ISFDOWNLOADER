@@ -64,4 +64,5 @@ export const ALL_TOOLS = [
   { title: 'Decision Wheel', desc: 'Spin to decide', path: '/wheel', icon: Dices, color: '#14b8a6', category: 'Utility' },
   { title: 'Expense Splitter', desc: 'Split the bill', path: '/expense', icon: Receipt, color: '#f59e0b', category: 'Utility' },
   { title: 'Unit Converter', desc: 'Convert anything', path: '/converter', icon: Calculator, color: '#06b6d4', category: 'Utility' },
+  { title: 'Visual Chart Deck', desc: 'CSV to Charts', path: '/visualizer', icon: BarChart3, color: '#3b82f6', category: 'Utility' },
 ];
