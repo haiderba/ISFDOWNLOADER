@@ -3,7 +3,7 @@ import {
   Palette, PaintBucket, Key, Code, FileEdit, Type, Globe, Layout,
   Database, Layers, Smartphone, Smile, Calendar, Activity, Keyboard, LayoutDashboard, GitCompare, HardDrive, LayoutTemplate, Minimize,
   Clock, Headphones, Video, Dices, Receipt, Calculator, Search,
-  Briefcase, TrendingUp, Tag, Shield, PenTool, AlignLeft, Files, Eye, Star
+  Briefcase, TrendingUp, Tag, Shield, PenTool, AlignLeft, Files, Eye, Star, BarChart3
 } from 'lucide-react';
 
 export const ALL_TOOLS = [
