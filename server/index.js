@@ -146,6 +146,15 @@ app.get('/api/video-info', async (req, res) => {
   }
 });
 
+// Global error safety handlers
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
 app.get('/api/download', async (req, res) => {
   const { url, type, jobId } = req.query;
   if (!url) return res.status(400).send('URL is required');
@@ -162,10 +171,14 @@ app.get('/api/download', async (req, res) => {
         noWarnings: true
       });
       
+      subprocess.catch((err) => {
+        console.error('Audio download error:', err.message);
+      });
+
       monitorProgress(subprocess, jobId, 'Extracting Audio');
       
       subprocess.on('close', (code) => {
-        if (code === 0) {
+        if (code === 0 && fs.existsSync(tempFile)) {
           sendProgress(jobId, { status: 'done', progress: 100 });
           res.download(tempFile, 'audio.mp3', () => cleanUpTempFile(tempFile));
         } else {
@@ -175,6 +188,7 @@ app.get('/api/download', async (req, res) => {
         }
       });
     } catch (err) {
+      console.error('Audio extraction catch error:', err);
       sendProgress(jobId, { status: 'error' });
       cleanUpTempFile(tempFile);
       if (!res.headersSent) res.status(500).send('Audio extraction failed');
@@ -183,25 +197,37 @@ app.get('/api/download', async (req, res) => {
   }
 
   // Regular Video Download
-  res.header('Content-Disposition', 'attachment; filename="downloaded_video.mp4"');
-  res.header('Content-Type', 'video/mp4');
+  const tempId = crypto.randomUUID();
+  const tempFile = path.join(os.tmpdir(), `${tempId}.mp4`);
   try {
     const subprocess = ytdl.exec(url, {
-      o: '-', 
-      f: 'best',
+      o: tempFile,
+      f: 'b/bestvideo+bestaudio/best',
+      mergeOutputFormat: 'mp4',
       noCheckCertificate: true,
       noWarnings: true
     });
     
-    monitorProgress(subprocess, jobId, 'Downloading Video');
-    
-    subprocess.on('close', () => {
-      sendProgress(jobId, { status: 'done', progress: 100 });
+    subprocess.catch((err) => {
+      console.error('Video download subprocess error:', err.message);
     });
 
-    subprocess.stdout.pipe(res);
+    monitorProgress(subprocess, jobId, 'Downloading Video');
+    
+    subprocess.on('close', (code) => {
+      if (code === 0 && fs.existsSync(tempFile)) {
+        sendProgress(jobId, { status: 'done', progress: 100 });
+        res.download(tempFile, 'downloaded_video.mp4', () => cleanUpTempFile(tempFile));
+      } else {
+        sendProgress(jobId, { status: 'error' });
+        cleanUpTempFile(tempFile);
+        if (!res.headersSent) res.status(500).send('Download failed');
+      }
+    });
   } catch (error) {
+    console.error('Video download catch error:', error);
     sendProgress(jobId, { status: 'error' });
+    cleanUpTempFile(tempFile);
     if (!res.headersSent) res.status(500).send('Download failed');
   }
 });
