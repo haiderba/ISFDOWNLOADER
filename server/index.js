@@ -155,21 +155,40 @@ process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err);
 });
 
+const getFfmpegLocation = () => {
+  const possiblePaths = [
+    '/opt/homebrew/bin',
+    '/usr/local/bin',
+    '/usr/bin'
+  ];
+  for (const p of possiblePaths) {
+    if (fs.existsSync(path.join(p, 'ffmpeg'))) {
+      return p;
+    }
+  }
+  return undefined;
+};
+
 app.get('/api/download', async (req, res) => {
   const { url, type, jobId } = req.query;
   if (!url) return res.status(400).send('URL is required');
+
+  const ffmpegLoc = getFfmpegLocation();
 
   if (type === 'audio') {
     const tempId = crypto.randomUUID();
     const tempFile = path.join(os.tmpdir(), `${tempId}.mp3`);
     try {
-      const subprocess = ytdl.exec(url, {
+      const flags = {
         o: path.join(os.tmpdir(), `${tempId}.%(ext)s`),
         x: true,
         audioFormat: 'mp3',
         noCheckCertificate: true,
         noWarnings: true
-      });
+      };
+      if (ffmpegLoc) flags.ffmpegLocation = ffmpegLoc;
+
+      const subprocess = ytdl.exec(url, flags);
       
       subprocess.catch((err) => {
         console.error('Audio download error:', err.message);
@@ -196,17 +215,20 @@ app.get('/api/download', async (req, res) => {
     return;
   }
 
-  // Regular Video Download
+  // Regular Video Download (H.264 + AAC for universal QuickTime / Apple compatibility)
   const tempId = crypto.randomUUID();
   const tempFile = path.join(os.tmpdir(), `${tempId}.mp4`);
   try {
-    const subprocess = ytdl.exec(url, {
+    const flags = {
       o: tempFile,
-      f: 'b/bestvideo+bestaudio/best',
+      f: 'bv*[vcodec^=avc]+ba[acodec^=mp4a]/bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/best',
       mergeOutputFormat: 'mp4',
       noCheckCertificate: true,
       noWarnings: true
-    });
+    };
+    if (ffmpegLoc) flags.ffmpegLocation = ffmpegLoc;
+
+    const subprocess = ytdl.exec(url, flags);
     
     subprocess.catch((err) => {
       console.error('Video download subprocess error:', err.message);
@@ -249,18 +271,21 @@ app.get('/api/download-gif', async (req, res) => {
   const { url, start = 0, duration = 5, jobId } = req.query;
   if (!url) return res.status(400).send('URL is required');
 
+  const ffmpegLoc = getFfmpegLocation();
   const tempId = crypto.randomUUID();
   const tempVid = path.join(os.tmpdir(), `${tempId}.mp4`);
   const tempGif = path.join(os.tmpdir(), `${tempId}.gif`);
 
   try {
-    // 1. Download video first
-    const subprocess = ytdl.exec(url, { 
+    const flags = { 
       o: tempVid, 
-      f: 'best', 
+      f: 'bv*[vcodec^=avc]+ba[acodec^=mp4a]/b[ext=mp4]/best', 
       noCheckCertificate: true,
       noWarnings: true 
-    });
+    };
+    if (ffmpegLoc) flags.ffmpegLocation = ffmpegLoc;
+
+    const subprocess = ytdl.exec(url, flags);
     monitorProgress(subprocess, jobId, 'Downloading Video (Step 1/2)');
     
     subprocess.on('close', (code) => {
