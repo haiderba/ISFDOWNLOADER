@@ -81,6 +81,41 @@ const cleanUpTempFile = (filePath) => {
   }
 };
 
+// Ensure SSL certificate path is resolved for yt-dlp on macOS/Linux
+if (!process.env.SSL_CERT_FILE) {
+  const possibleCertPaths = [
+    '/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/certifi/cacert.pem',
+    '/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/certifi/cacert.pem',
+    '/etc/ssl/certs/ca-certificates.crt'
+  ];
+  for (const certPath of possibleCertPaths) {
+    if (fs.existsSync(certPath)) {
+      process.env.SSL_CERT_FILE = certPath;
+      break;
+    }
+  }
+}
+
+const getYtDlpInstance = () => {
+  const possiblePaths = [
+    '/Library/Frameworks/Python.framework/Versions/3.13/bin/yt-dlp',
+    '/Library/Frameworks/Python.framework/Versions/3.12/bin/yt-dlp',
+    '/usr/local/bin/yt-dlp',
+    '/usr/bin/yt-dlp',
+    path.join(__dirname, 'node_modules/youtube-dl-exec/bin/yt-dlp')
+  ];
+
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      console.log(`Using yt-dlp binary at: ${p}`);
+      return youtubedl.create(p);
+    }
+  }
+  return youtubedl;
+};
+
+const ytdl = getYtDlpInstance();
+
 app.get('/api/video-info', async (req, res) => {
   const { url } = req.query;
   if (!url) {
@@ -88,12 +123,10 @@ app.get('/api/video-info', async (req, res) => {
   }
 
   try {
-    const output = await youtubedl(url, {
+    const output = await ytdl(url, {
       dumpSingleJson: true,
-      noCheckCertificates: true,
-      noWarnings: true,
-      preferFreeFormats: true,
-      addHeader: ['referer:youtube.com']
+      noCheckCertificate: true,
+      noWarnings: true
     });
     
     res.json({
@@ -101,11 +134,15 @@ app.get('/api/video-info', async (req, res) => {
       thumbnail: output.thumbnail,
       duration: output.duration,
       extractor: output.extractor,
-      formats: output.formats,
+      formats: output.formats || [],
       subtitles: output.subtitles || {}
     });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch video information' });
+    console.error('Video info fetch error:', error);
+    const stderrMsg = error.stderr ? error.stderr.split('\n').filter(l => l.includes('ERROR:')).join(' ') : '';
+    res.status(500).json({ 
+      error: stderrMsg || error.message || 'Failed to fetch video information. Please verify the URL.' 
+    });
   }
 });
 
@@ -117,11 +154,11 @@ app.get('/api/download', async (req, res) => {
     const tempId = crypto.randomUUID();
     const tempFile = path.join(os.tmpdir(), `${tempId}.mp3`);
     try {
-      const subprocess = youtubedl.exec(url, {
+      const subprocess = ytdl.exec(url, {
         o: path.join(os.tmpdir(), `${tempId}.%(ext)s`),
         x: true,
         audioFormat: 'mp3',
-        noCheckCertificates: true,
+        noCheckCertificate: true,
         noWarnings: true
       });
       
@@ -149,12 +186,11 @@ app.get('/api/download', async (req, res) => {
   res.header('Content-Disposition', 'attachment; filename="downloaded_video.mp4"');
   res.header('Content-Type', 'video/mp4');
   try {
-    const subprocess = youtubedl.exec(url, {
+    const subprocess = ytdl.exec(url, {
       o: '-', 
       f: 'best',
-      noCheckCertificates: true,
-      noWarnings: true,
-      addHeader: ['referer:youtube.com']
+      noCheckCertificate: true,
+      noWarnings: true
     });
     
     monitorProgress(subprocess, jobId, 'Downloading Video');
@@ -193,7 +229,12 @@ app.get('/api/download-gif', async (req, res) => {
 
   try {
     // 1. Download video first
-    const subprocess = youtubedl.exec(url, { o: tempVid, f: 'best', noWarnings: true });
+    const subprocess = ytdl.exec(url, { 
+      o: tempVid, 
+      f: 'best', 
+      noCheckCertificate: true,
+      noWarnings: true 
+    });
     monitorProgress(subprocess, jobId, 'Downloading Video (Step 1/2)');
     
     subprocess.on('close', (code) => {
@@ -211,7 +252,6 @@ app.get('/api/download-gif', async (req, res) => {
         .size('480x?')
         .output(tempGif)
         .on('progress', (progress) => {
-          // progress.percent is sometimes provided by fluent-ffmpeg, otherwise fake it
           let p = progress.percent ? Math.min(Math.floor(progress.percent), 99) : 50;
           sendProgress(jobId, { status: 'Converting GIF (Step 2/2)', progress: p });
         })
